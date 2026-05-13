@@ -15,17 +15,17 @@ import java.util.List;
  * - de calculer la médiane.
  *
  * Cette classe ne contient pas de main().
- * Le main() sera placé dans une autre classe appelée Principale.
+ * Le main() est placé dans la classe Principale.
  */
 public class CalculTab {
 
     /**
      * Liste contenant les notes des étudiants.
      *
-     * On utilise une ArrayList au lieu d'un tableau fixe int[],
-     * car le TP demande de remplacer le tableau par une collection.
+     * On utilise une ArrayList au lieu d'un tableau fixe.
+     * Les notes sont stockées en Double afin d'accepter les notes à virgule.
      */
-    private final List<Integer> notes;
+    private final List<Double> notes;
 
     /**
      * Constructeur de la classe.
@@ -41,7 +41,7 @@ public class CalculTab {
      *
      * @param note la note à ajouter
      */
-    public void ajouterNote(int note) {
+    public void ajouterNote(double note) {
         notes.add(note);
     }
 
@@ -67,13 +67,13 @@ public class CalculTab {
             return 0;
         }
 
-        int somme = 0;
+        double somme = 0;
 
-        for (int note : notes) {
+        for (double note : notes) {
             somme += note;
         }
 
-        return (double) somme / notes.size();
+        return somme / notes.size();
     }
 
     /**
@@ -81,14 +81,6 @@ public class CalculTab {
      *
      * La médiane est la valeur située au milieu
      * lorsque les notes sont triées.
-     *
-     * Exemple avec un nombre impair de notes :
-     * notes triées : 10, 12, 15
-     * médiane : 12
-     *
-     * Exemple avec un nombre pair de notes :
-     * notes triées : 10, 12, 14, 16
-     * médiane : (12 + 14) / 2 = 13
      *
      * @return la médiane des notes
      */
@@ -98,10 +90,10 @@ public class CalculTab {
         }
 
         /*
-         * On crée une copie de la liste.
-         * Cela évite de modifier l'ordre original des notes saisies.
+         * On crée une copie de la liste pour ne pas modifier
+         * l'ordre original des notes saisies.
          */
-        List<Integer> notesTriees = new ArrayList<>(notes);
+        List<Double> notesTriees = new ArrayList<>(notes);
 
         /*
          * On trie les notes dans l'ordre croissant.
@@ -134,8 +126,8 @@ public class CalculTab {
      *
      * @return une liste contenant les notes triées
      */
-    public List<Integer> getNotesTriees() {
-        List<Integer> notesTriees = new ArrayList<>(notes);
+    public List<Double> getNotesTriees() {
+        List<Double> notesTriees = new ArrayList<>(notes);
         Collections.sort(notesTriees);
         return notesTriees;
     }
@@ -154,7 +146,7 @@ public class CalculTab {
 
         builder.append("Notes : ");
 
-        for (int note : notes) {
+        for (double note : notes) {
             builder.append(note).append(" ");
         }
 
