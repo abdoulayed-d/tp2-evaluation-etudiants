@@ -2,6 +2,7 @@ package calcultableau;
 
 import java.time.LocalDate;
 import java.util.Scanner;
+import java.io.IOException;
 
 /**
  * Classe principale de l'application.
@@ -58,6 +59,7 @@ public class Principale {
             }
 
             afficherResultat(utilisateur, calculTab);
+            sauvegarderResultat(utilisateur, calculTab);
 
             continuer = demanderNouvelleSaisie(scanner);
         }
@@ -234,4 +236,19 @@ public class Principale {
         System.out.printf("Moyenne : %.2f%n", calculTab.calculerMoyenne());
         System.out.printf("Médiane : %.2f%n", calculTab.calculerMediane());
     }
+    /**
+     * Sauvegarde le résultat de l'évaluation dans un fichier CSV.
+     *
+     * @param utilisateur l'enseignant qui saisit les notes
+     * @param calculTab l'objet contenant les notes et les calculs
+     */
+    private static void sauvegarderResultat(UtilisateurTab utilisateur, CalculTab calculTab) {
+        try {
+            SauvegardeResultat.sauvegarder(utilisateur, calculTab);
+            System.out.println("Résultat sauvegardé dans le fichier resultats-evaluations.csv");
+        } catch (IOException e) {
+            System.out.println("Erreur : impossible de sauvegarder le résultat.");
+        }
+    }
 }
+
